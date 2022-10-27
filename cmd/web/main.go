@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/smtp"
 	"os"
 	"time"
 
@@ -64,6 +65,19 @@ func main() {
 	}
 	defer db.SQL.Close()
 
+	defer close(app.MailChan)
+
+	fmt.Println("Starting mail Listener....")
+
+	ListenForMail()
+
+	from := "me@here.com"
+	auth := smtp.PlainAuth("", from, "", "localhost")
+	err = smtp.SendMail("localhost:1025", auth, from, []string{"you@there.com"}, []byte("Hello World"))
+	if err != nil {
+		log.Println(err)
+	}
+
 	fmt.Println(fmt.Sprintf("Staring application on port %s", portNumber))
 
 	srv := &http.Server{
@@ -83,6 +97,9 @@ func run() (*driver.DB, error) {
 	gob.Register(models.User{})
 	gob.Register(models.Room{})
 	gob.Register(models.Restriction{})
+
+	mailChan := make(chan models.MailData)
+	app.MailChan = mailChan
 
 	// change this to true when in production
 	app.InProduction = false

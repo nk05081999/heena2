@@ -15,6 +15,11 @@ require (
 	github.com/jackc/pgtype v1.12.0 // indirect
 	github.com/jackc/pgx/v4 v4.17.2 // indirect
 	github.com/justinas/nosurf v1.1.1 // indirect
+	github.com/mailhog/mhsendmail v0.2.0 // indirect
+	github.com/ogier/pflag v0.0.1 // indirect
+	github.com/toorop/go-dkim v0.0.0-20201103131630-e1cd1a0a5208 // indirect
+	github.com/xhit/go-simple-mail v2.2.2+incompatible // indirect
+	github.com/xhit/go-simple-mail/v2 v2.12.0 // indirect
 	golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa // indirect
 	golang.org/x/text v0.3.7 // indirect
 )
